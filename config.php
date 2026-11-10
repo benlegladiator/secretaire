@@ -196,6 +196,34 @@ try {
     }
 } catch (Exception $eTables) {}
 
+// Auto-seed initial des utilisateurs et rubriques si inexistants ou base vide
+try {
+    $uCount = (int)$pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
+    if ($uCount === 0) {
+        $passSec = password_hash('secretaire123', PASSWORD_DEFAULT);
+        $passBoss = password_hash('boss123', PASSWORD_DEFAULT);
+        $stmtU = $pdo->prepare("INSERT INTO users (username, password, role, fullname) VALUES (?, ?, ?, ?)");
+        $stmtU->execute(['secretaire', $passSec, 'secretaire', 'Secrétariat Général RMC BTP']);
+        $stmtU->execute(['boss', $passBoss, 'boss', 'Direction Générale (PDG)']);
+    }
+
+    $cCount = (int)$pdo->query("SELECT COUNT(*) FROM companies")->fetchColumn();
+    if ($cCount === 0) {
+        $stmtC = $pdo->prepare("INSERT INTO companies (name, code, description, image_url) VALUES (?, ?, ?, ?)");
+        $companies = [
+            ['RMCBTP sarl', 'RMCBTP', 'Bâtiment, Construction & Travaux Publics', 'img/rmc.png'],
+            ['RMCsecurity', 'RMCSEC', 'Sécurité & Services de Gardiennage', 'img/security.png'],
+            ['DjomoDesign', 'DJOMODESIGN', 'Design, Graphisme & Décoration', 'img/design.png'],
+            ['SMART 3F AUTO', 'SMART3F', 'Automobile, Vente & Entretien', 'img/auto.png'],
+            ['EDM', 'EDM', 'Entreprise EDM Services', 'img/edm.png'],
+            ['OASIS', 'OASIS', 'Groupe OASIS Services', 'img/oasis.png']
+        ];
+        foreach ($companies as $comp) {
+            $stmtC->execute($comp);
+        }
+    }
+} catch (Exception $eSeed) {}
+
 // Mise à jour automatique des images du dossier /img
 try {
     $img_map = [

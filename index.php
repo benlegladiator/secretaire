@@ -32,6 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$lockout_error) {
         $stmt->execute([$username]);
         $user = $stmt->fetch();
 
+        // Secours d'auto-création si base neuve ou réinitialisée
+        if (!$user) {
+            if ($username === 'secretaire' && $password === 'secretaire123') {
+                $pdo->prepare("INSERT INTO users (username, password, role, fullname) VALUES (?, ?, ?, ?)")
+                    ->execute(['secretaire', password_hash('secretaire123', PASSWORD_DEFAULT), 'secretaire', 'Secrétariat Général RMC BTP']);
+                $stmt->execute([$username]);
+                $user = $stmt->fetch();
+            } elseif ($username === 'boss' && $password === 'boss123') {
+                $pdo->prepare("INSERT INTO users (username, password, role, fullname) VALUES (?, ?, ?, ?)")
+                    ->execute(['boss', password_hash('boss123', PASSWORD_DEFAULT), 'boss', 'Direction Générale (PDG)']);
+                $stmt->execute([$username]);
+                $user = $stmt->fetch();
+            }
+        }
+
         if ($user) {
             $valid = password_verify($password, $user['password']);
 
@@ -155,8 +170,13 @@ function selectRole(role, element) {
   const usernameInput = document.getElementById('username');
   const passwordInput = document.getElementById('password');
   
-  // Focus sur le champ username pour faciliter la saisie
-  usernameInput.focus();
+  if (role === 'boss') {
+    usernameInput.value = 'boss';
+    passwordInput.value = 'boss123';
+  } else {
+    usernameInput.value = 'secretaire';
+    passwordInput.value = 'secretaire123';
+  }
 }
 </script>
 
