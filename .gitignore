@@ -1,0 +1,4 @@
+# Fichiers de données locales
+database.sqlite
+backups/
+*.log

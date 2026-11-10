@@ -1,0 +1,189 @@
+/* ==========================================================================
+   RMC HOLDING - STYLES D'IMPRESSION (REÇUS & RAPPORTS)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+@page {
+  size: A4 portrait;
+  margin: 15mm;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  color: #000000;
+  background: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  font-size: 12pt;
+  line-height: 1.4;
+}
+
+/* Masquer les éléments de navigation et boutons à l'impression */
+.no-print, .app-header, .btn, .filter-bar, .role-tabs {
+  display: none !important;
+}
+
+.receipt-box {
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 25px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.receipt-logo {
+  font-size: 20pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.receipt-company-info {
+  font-size: 9pt;
+  color: #333333;
+  margin-top: 4px;
+}
+
+.receipt-meta {
+  text-align: right;
+}
+
+.receipt-number {
+  font-size: 14pt;
+  font-weight: 800;
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.receipt-date {
+  font-size: 10pt;
+}
+
+.receipt-body {
+  margin-bottom: 30px;
+}
+
+.receipt-row {
+  display: flex;
+  margin-bottom: 12px;
+  font-size: 11pt;
+}
+
+.receipt-label {
+  font-weight: 700;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.receipt-value {
+  flex-grow: 1;
+  border-bottom: 1px dotted #666666;
+  padding-bottom: 2px;
+}
+
+.receipt-amounts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.receipt-amounts-table th, .receipt-amounts-table td {
+  border: 1px solid #000000;
+  padding: 10px;
+  text-align: right;
+}
+
+.receipt-amounts-table th {
+  background: #f0f0f0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.receipt-signatures {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding-top: 10px;
+}
+
+.signature-block {
+  width: 45%;
+  text-align: center;
+}
+
+.signature-title {
+  font-weight: 700;
+  margin-bottom: 60px;
+  text-decoration: underline;
+}
+
+.receipt-footer {
+  text-align: center;
+  font-size: 8pt;
+  color: #666666;
+  margin-top: 30px;
+  border-top: 1px solid #CCCCCC;
+  padding-top: 10px;
+}
+
+/* Style de Rapport Journalier */
+.report-header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 3px double #000;
+  padding-bottom: 15px;
+}
+
+.report-title {
+  font-size: 18pt;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.report-subtitle {
+  font-size: 11pt;
+  margin-top: 5px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.report-table th, .report-table td {
+  border: 1px solid #000000;
+  padding: 8px 10px;
+  font-size: 10pt;
+}
+
+.report-table th {
+  background: #E2E8F0;
+  font-weight: 700;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: 700;
+}
